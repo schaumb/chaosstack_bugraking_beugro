@@ -12,7 +12,7 @@ app.get("/team-members", function (req, res) {
 });
 
 app.get("/competitors", function (req, res) {
-  var teamInfos = [{"name": teamMembers.teamName}];
+  var teamInfos = [];
   var chaosUrl = configObj.chaosBaseUrl + configObj.teamHash;
   var counter = 0;
   request({
@@ -30,9 +30,9 @@ app.get("/competitors", function (req, res) {
         console.log(url);
         request({
           url: url,
-          json: true
         }, function (error, response, body) {
           if (!error && response.statusCode === 200) {
+            var body = JSON.parse(body);
             if(!!body.teamName){
               teamInfos.push({"name": body.teamName});
             }
