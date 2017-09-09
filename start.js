@@ -46,6 +46,8 @@ app.get("/competitors", function(req,res){
 });
 
 
-var server = app.listen(8081, function () {
+app.set('port', (process.env.PORT || 5000));
 
+var server = app.listen(app.get('port'), function () {
+  console.log("App is running on port", app.get('port'));
 })
